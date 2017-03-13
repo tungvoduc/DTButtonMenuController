@@ -1,0 +1,6 @@
+framework module DTButtonMenuController {
+  umbrella header "DTButtonMenuController-umbrella.h"
+
+  export *
+  module * { export * }
+}
