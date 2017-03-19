@@ -9,5 +9,5 @@
 import Foundation
 
 @objc public protocol DTButtonMenuControllerDelegate: NSObjectProtocol {
-    func buttonMenuController(_ controller: DTButtonMenuController, didSelectButtonItem: DTMenuButtonItem)
+    func buttonMenuController(_ controller: DTButtonMenuController, didSelectButtonItem: DTMenuButton)
 }
