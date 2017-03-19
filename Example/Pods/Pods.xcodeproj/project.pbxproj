@@ -80,8 +80,9 @@
 		82E9419FB2565153498EF37F73BA2A7D /* Pods-DTButtonMenuController_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D39AC521884A5BE84CFD39E853CB543F /* Pods-DTButtonMenuController_Tests-dummy.m */; };
 		841B45DF1E76120100BCF04D /* DTButtonMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841B45DE1E76120100BCF04D /* DTButtonMenuController.swift */; };
 		841B45E11E76124900BCF04D /* DTMenuButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841B45E01E76124900BCF04D /* DTMenuButtonItem.swift */; };
-		841B45E31E7613E300BCF04D /* DTMenuButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841B45E21E7613E300BCF04D /* DTMenuButtonView.swift */; };
 		841B45E51E761DF300BCF04D /* DTButtonMenuControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841B45E41E761DF300BCF04D /* DTButtonMenuControllerDelegate.swift */; };
+		84247D8A1E7BDD520069774E /* TransitionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84247D891E7BDD520069774E /* TransitionController.swift */; };
+		84247D8E1E7C070F0069774E /* ButtonPositioningDriver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84247D8D1E7C070F0069774E /* ButtonPositioningDriver.swift */; };
 		8507F4BF7437EB40A3626EDCC68BFF6D /* Contain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006ED45CA89BF1184872D135803B008C /* Contain.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		8654571F855691C23B7B8E61B2141944 /* EndWith.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FEA4B7E2BD931E1785D5FC2F9A67DE9 /* EndWith.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		867B546C8A79499B9E148ED58222B9EF /* ExampleHooks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F077BF65ADAB96D26191001735CF8A2 /* ExampleHooks.swift */; };
@@ -308,8 +309,9 @@
 		83A8EE83B7FA36222BEEED5AAD46A993 /* Pods-DTButtonMenuController_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-DTButtonMenuController_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		841B45DE1E76120100BCF04D /* DTButtonMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DTButtonMenuController.swift; sourceTree = "<group>"; };
 		841B45E01E76124900BCF04D /* DTMenuButtonItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DTMenuButtonItem.swift; sourceTree = "<group>"; };
-		841B45E21E7613E300BCF04D /* DTMenuButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DTMenuButtonView.swift; sourceTree = "<group>"; };
 		841B45E41E761DF300BCF04D /* DTButtonMenuControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DTButtonMenuControllerDelegate.swift; sourceTree = "<group>"; };
+		84247D891E7BDD520069774E /* TransitionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionController.swift; sourceTree = "<group>"; };
+		84247D8D1E7C070F0069774E /* ButtonPositioningDriver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonPositioningDriver.swift; sourceTree = "<group>"; };
 		843C71B76BF6333F7E3BC21CF4790615 /* Functional.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Functional.swift; path = Sources/Nimble/Utils/Functional.swift; sourceTree = "<group>"; };
 		87CF70DA6913C74B478980A07C7D4C14 /* BeNil.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BeNil.swift; path = Sources/Nimble/Matchers/BeNil.swift; sourceTree = "<group>"; };
 		88ACCBB5E3910980D61E82E008DA4002 /* Quick.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Quick.xcconfig; sourceTree = "<group>"; };
@@ -605,7 +607,8 @@
 				841B45DE1E76120100BCF04D /* DTButtonMenuController.swift */,
 				841B45E41E761DF300BCF04D /* DTButtonMenuControllerDelegate.swift */,
 				841B45E01E76124900BCF04D /* DTMenuButtonItem.swift */,
-				841B45E21E7613E300BCF04D /* DTMenuButtonView.swift */,
+				84247D891E7BDD520069774E /* TransitionController.swift */,
+				84247D8D1E7C070F0069774E /* ButtonPositioningDriver.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -1202,9 +1205,10 @@
 			files = (
 				2F06DE16EB7431250AD16B65FAB81B1D /* DTButtonMenuController-dummy.m in Sources */,
 				841B45E51E761DF300BCF04D /* DTButtonMenuControllerDelegate.swift in Sources */,
-				841B45E31E7613E300BCF04D /* DTMenuButtonView.swift in Sources */,
 				841B45DF1E76120100BCF04D /* DTButtonMenuController.swift in Sources */,
 				841B45E11E76124900BCF04D /* DTMenuButtonItem.swift in Sources */,
+				84247D8A1E7BDD520069774E /* TransitionController.swift in Sources */,
+				84247D8E1E7C070F0069774E /* ButtonPositioningDriver.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
