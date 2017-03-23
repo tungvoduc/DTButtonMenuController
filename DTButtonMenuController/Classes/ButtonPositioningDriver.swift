@@ -8,6 +8,11 @@
 
 import UIKit
 
+enum ButtonPositionDriverType {
+    case Satellite
+    case Arc
+}
+
 enum Position {
     case left
     case right
@@ -24,12 +29,23 @@ class ButtonPositioningDriver: NSObject {
     /// Radius of button.
     var buttonRadius: CGFloat
     
+    /// Positioning type
+    var positioningType: ButtonPositionDriverType
+    
+    /// Arc
+    var buttonsArc: Double = Double.pi * 3 / 2
+    
+    /// Distance from touchPoint to a button
+    var distance: CGFloat = 24.0
+    
     /// If not provide maxButtonsAngle, maxButtonsAngle will be automatically calculated by numberOfButtons, maxButtonsAngle = Pi/(numberOfButtons * 2)
-    init(numberOfButtons: Int, buttonRadius radius: CGFloat, buttonsAngle angle: Double = Double.pi/6) {
+    init(numberOfButtons: Int, buttonRadius radius: CGFloat, buttonsAngle angle: Double = Double.pi/6, positioningType type: ButtonPositionDriverType = .Satellite) {
         numberOfItems = numberOfButtons
         buttonRadius = radius
         
         buttonAngle = angle
+        
+        positioningType = type;
         
         super.init()
     }
@@ -79,5 +95,57 @@ class ButtonPositioningDriver: NSObject {
         }
         
         return positions
+    }
+    
+    private func angleBetweenTwoButtons() -> Double {
+        let totalAngle = numberOfItems - 1 == 0 ? 0.0 : buttonsArc;
+        
+        switch positioningType {
+        case .Arc:
+            return totalAngle / Double(numberOfItems - 1)
+        case .Satellite:
+            return Double.pi / Double(numberOfItems - 1)
+        }
+    }
+    
+    
+    private func fromAngleAndToAngleInView(withSize size: CGSize, atPoint point: CGPoint) -> [Double] {
+        var fromAngle = 0.0;
+        var toAngle = 0.0;
+        
+        if (positioningType == .Satellite) {
+            fromAngle = 0.0;
+            toAngle = Double.pi * 2;
+        } else {
+            if (buttonsArc >= Double.pi * 2) {
+                fromAngle = (buttonsArc - Double.pi) / 2
+                toAngle = fromAngle - buttonsArc
+            } else {
+                fromAngle = -(Double.pi - buttonsArc) / 2
+                toAngle = -(Double.pi - fromAngle) / 2
+            }
+        }
+        
+        // Now recalculate fromAngle and to Angle if the button is not fully visible on screen.
+        // fromPoint and toPoint are two point on
+        
+        let fromPointX: CGFloat = (distance + buttonRadius) * cos(CGFloat(fromAngle)) + point.x
+        let fromPointY: CGFloat = (distance + buttonRadius) * sin(CGFloat(fromAngle)) + point.y
+        
+        let toPointX: CGFloat = (distance + buttonRadius) * cos(CGFloat(toAngle)) + point.x
+        let toPointY: CGFloat = (distance + buttonRadius) * sin(CGFloat(toAngle)) + point.y
+        
+        let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+        
+        let fromPointIsInView = rect.contains(CGPoint(x: fromPointX, y: fromPointY))
+        let toPointIsInView = rect.contains(CGPoint(x: toPointX, y: toPointY))
+        
+        if (!fromPointIsInView || !toPointIsInView) {
+            if (!fromPointIsInView) {
+                
+            }
+        }
+        
+        return [fromAngle, toAngle];
     }
 }
