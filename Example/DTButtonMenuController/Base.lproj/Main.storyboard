@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12117" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12084"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -35,22 +36,8 @@
                                     <action selector="buttonTapped:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="LjR-DL-KNf"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gM6-JE-6O0">
-                                <rect key="frame" x="137" y="398" width="100" height="50"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="2wX-vt-cO3"/>
-                                    <constraint firstAttribute="width" constant="100" id="pp6-C5-8qI"/>
-                                </constraints>
-                                <state key="normal" title="Button">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="buttonTapped:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="MjK-BG-3nm"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CNg-Kh-hsS">
-                                <rect key="frame" x="137" y="218" width="100" height="50"/>
+                                <rect key="frame" x="24" y="30" width="100" height="50"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="43e-vU-udL"/>
@@ -63,15 +50,25 @@
                                     <action selector="buttonTapped:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="ulS-yC-abj"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gM6-JE-6O0">
+                                <rect key="frame" x="306" y="621" width="46" height="30"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="buttonTapped:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="MjK-BG-3nm"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="hxs-Fr-nHC" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" id="0Am-JC-9CL"/>
-                            <constraint firstItem="CNg-Kh-hsS" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="Adv-St-1sP"/>
+                            <constraint firstItem="CNg-Kh-hsS" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="8" id="C3y-EJ-W7p"/>
                             <constraint firstItem="hxs-Fr-nHC" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="DME-6X-F2N"/>
-                            <constraint firstItem="gM6-JE-6O0" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="Khy-fO-prp"/>
-                            <constraint firstItem="gM6-JE-6O0" firstAttribute="top" secondItem="hxs-Fr-nHC" secondAttribute="bottom" constant="40" id="O8Y-Jn-33w"/>
-                            <constraint firstItem="hxs-Fr-nHC" firstAttribute="top" secondItem="CNg-Kh-hsS" secondAttribute="bottom" constant="40" id="oRU-Dm-Ndg"/>
+                            <constraint firstItem="CNg-Kh-hsS" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="10" id="czG-6u-dqv"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="gM6-JE-6O0" secondAttribute="bottom" constant="16" id="gBu-ZU-zis"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="gM6-JE-6O0" secondAttribute="trailing" constant="7" id="vGn-7L-4Bw"/>
                         </constraints>
                     </view>
                     <connections>
