@@ -43,6 +43,12 @@ class ViewController: UIViewController {
         viewController.addItem(DTMenuButton(view: CustomItemView(type: UIButtonType.system), completionHandlerBlock: {(item: DTMenuButton) in
             print("Button 3")
         }))
+        viewController.addItem(DTMenuButton(view: CustomItemView(type: UIButtonType.system), completionHandlerBlock: {(item: DTMenuButton) in
+            print("Button 4")
+        }))
+        viewController.addItem(DTMenuButton(view: CustomItemView(type: UIButtonType.system), completionHandlerBlock: {(item: DTMenuButton) in
+            print("Button 5")
+        }))
         
         self.present(viewController, animated: true, completion: nil)
     }
