@@ -41,13 +41,16 @@ class ButtonPositioningDriver: NSObject {
     var positioningType: ButtonPositionDriverType
     
     /// Arc
-    var buttonsArc: Double = Double.pi / 2
+    var buttonsArc: Double = Double.pi / 2 + Double.pi / 6
     
     /// Distance from touchPoint to a button
-    var distance: CGFloat = 50.0
+    var distance: CGFloat = 100.0
     
     /// Allow the buttons and the distance from touchPoint to the button center to be scaled
     var scaleable: Bool = false
+    
+    /// Margin to the edge to the screen or the defined view
+    var margin: CGFloat = 8.0
     
     /// If not provide maxButtonsAngle, maxButtonsAngle will be automatically calculated by numberOfButtons, maxButtonsAngle = Pi/(numberOfButtons * 2)
     init(numberOfButtons: Int, buttonRadius radius: CGFloat, buttonsAngle angle: Double = Double.pi/6, positioningType type: ButtonPositionDriverType = .Arc) {
@@ -62,24 +65,26 @@ class ButtonPositioningDriver: NSObject {
     }
     
     func positionsOfItemsInView(with size: CGSize, at touchPoint: CGPoint) -> [CGPoint] {
-        // Get sin of angle (which is half of button angle
         var points = [CGPoint]()
         
         let fromAndToAngles = self.fromAngleAndToAngleInView(withSize: size, atPoint: touchPoint)
-        let fromAngle = fromAndToAngles[0];
-        let toAngle = fromAndToAngles[1];
-        let maximumArcAngle = toAngle - fromAngle
+        let fromAngle = fromAndToAngles[0]
+        let toAngle = fromAndToAngles[1]
+        
         var startingAngle = 0.0
         
-        if maximumArcAngle > buttonsArc {
-            startingAngle = (maximumArcAngle - buttonsArc) / 2
+        let difference = toAngle - fromAngle
+        
+        if fabs(difference) > buttonsArc {
+            
+            startingAngle = difference > 0 ? (difference - buttonsArc) / 2 : (difference +  buttonsArc) / 2
         }
         
-        let step = (toAngle - fromAngle) / Double(numberOfItems - 1)
+        let step = (toAngle - fromAngle > 0 ? buttonsArc : -buttonsArc ) / Double(numberOfItems - 1)
         
         
         for i in 0 ..< numberOfItems {
-            let angle = step * Double(i) + fromAngle
+            let angle = step * Double(i) + fromAngle + startingAngle;
             let x = touchPoint.x + (distance + buttonRadius) * CGFloat(cos(angle))
             let y = touchPoint.y + (distance + buttonRadius) * CGFloat(sin(angle))
             let point = CGPoint(x: x, y: y)
@@ -88,40 +93,6 @@ class ButtonPositioningDriver: NSObject {
         
         return points
     }
-    
-    func suitablePositionsInView(with size: CGSize, at touchPoint: CGPoint, radius: CGFloat) -> [Position] {
-        // Get distance to four sides of view
-        let leftDistance = touchPoint.x
-        let topDistance = touchPoint.y
-        let rightDistance = size.width - touchPoint.x
-        let bottomDistance = size.height - touchPoint.y
-        let offset: CGFloat = 50
-        var positions = [Position]()
-        
-        if leftDistance - offset > radius {
-            positions.append(.left)
-        }
-        
-        if topDistance - offset > radius {
-            positions.append(.top)
-        }
-        
-        if rightDistance - offset > radius {
-            positions.append(.right)
-        }
-        
-        if bottomDistance - offset > radius {
-            positions.append(.bottom)
-        }
-        
-        return positions
-    }
-    
-    private func angleBetweenTwoButtons(withFromAngle fromAngle: Double, withToAngle toAngle: Double) -> Double {
-        let totalAngle = abs(toAngle - fromAngle);
-        return totalAngle / Double(numberOfItems - 1)
-    }
-    
     
     private func fromAngleAndToAngleInView(withSize size: CGSize, atPoint point: CGPoint) -> [Double] {
         var fromAngle = 0.0;
@@ -140,20 +111,45 @@ class ButtonPositioningDriver: NSObject {
             }
         }
         
-        let outerRadius: CGFloat = distance +  buttonRadius * 2;
+        let outerRadius: CGFloat = distance +  buttonRadius * 2 + margin;
         let touchPointInset = self.distanceOfTouchPointToEdges(touchPoint: point, inViewWithSize: size)
+        let touchPointPosition = self.touchPointPositionInView(withSize: size, touchPoint: point)
         
         // This version prioritises to display the buttons to the TOP therefore it does not check touchPointInset.bottom > outerRadius
-        if (touchPointInset.top > outerRadius && touchPointInset.right > outerRadius && touchPointInset.top > outerRadius) {
-            return [fromAngle, toAngle];
+        if (touchPointInset.top > outerRadius && touchPointInset.left > outerRadius && touchPointInset.right > outerRadius) {
+            return [fromAngle, toAngle]
+        }
+        
+        if (touchPointInset.top < outerRadius && touchPointInset.left > outerRadius && touchPointInset.right > outerRadius) {
+            return [-fromAngle, -toAngle]
+        }
+        
+        if (touchPointInset.top > outerRadius && touchPointInset.bottom > outerRadius && touchPointInset.left < touchPointInset.right) {
+            return [-(Double.pi / 2 + fromAngle), (Double.pi / 2 + fromAngle)]
+        }
+        
+        if (touchPointInset.top > outerRadius && touchPointInset.bottom > outerRadius && touchPointInset.left > touchPointInset.right) {
+            return [(Double.pi / 2 + fromAngle) - Double.pi, (Double.pi / 2 + fromAngle) - Double.pi - buttonsArc]
         }
         
         let thresholdPoints = self.thresholdPointsOfButtonsArcInView(withSize: size, atTouchPoint: point);
         let firstPoint = thresholdPoints[0];
         let secondPoint = thresholdPoints[1];
         
-        let firstAngle: Double = (Double)(self.angleBetweenHorizontalLineAndLineHasCenterPointAndAnotherPoint(centerPoint: point, anotherPoint: firstPoint))
-        let secondAngle: Double = (Double)(self.angleBetweenHorizontalLineAndLineHasCenterPointAndAnotherPoint(centerPoint: point, anotherPoint: secondPoint))
+        var firstAngle: Double = (Double)(self.angleBetweenHorizontalLineAndLineHasCenterPointAndAnotherPoint(centerPoint: point, anotherPoint: firstPoint))
+        var secondAngle: Double = (Double)(self.angleBetweenHorizontalLineAndLineHasCenterPointAndAnotherPoint(centerPoint: point, anotherPoint: secondPoint))
+        
+        if (firstAngle > secondAngle) {
+            let temp = secondAngle
+            secondAngle = firstAngle
+            firstAngle = temp
+        }
+        
+        if touchPointPosition == .topLeft || touchPointPosition == .bottomLeft {
+            //secondAngle = secondAngle < 0 ? Double.pi + fabs(Double.pi - fabs(secondAngle)) : secondAngle
+        } else if touchPointPosition == .topRight || touchPointPosition == .bottomRight {
+            secondAngle = secondAngle > 0 ? -(Double.pi * 2 - secondAngle) : secondAngle;
+        }
         
         return [firstAngle, secondAngle];
     }
@@ -182,17 +178,12 @@ class ButtonPositioningDriver: NSObject {
         
         return touchPosition
     }
-    
-    private func maximumButtonsArcInView(withSize size: CGSize, atTouchPoint point: CGPoint) -> CGFloat {
-        
-        return 0.0;
-    }
-    
+
     private func thresholdPointsOfButtonsArcInView(withSize size: CGSize, atTouchPoint point: CGPoint) -> [CGPoint]  {
-        let arcRadius: CGFloat = distance + buttonRadius;
-        let margin: CGFloat = 8.0;
-        let marginX: CGFloat = 8.0;
-        let marginY: CGFloat = 8.0;
+        
+        let marginX: CGFloat = margin;
+        let marginY: CGFloat = margin;
+        let arcRadius: CGFloat = distance + buttonRadius * 2 + margin;
         
         let touchPointInset = self.distanceOfTouchPointToEdges(touchPoint: point, inViewWithSize: size)
         let touchPointPosition = self.touchPointPositionInView(withSize: size, touchPoint: point)
@@ -205,26 +196,26 @@ class ButtonPositioningDriver: NSObject {
         switch touchPointPosition {
         case .topLeft:
             fromPointOffsetXSign = touchPointInset.top >= arcRadius ? -1 : 1
-            fromPointOffsetYSign = marginY + buttonRadius >= touchPointInset.top ? 1 : -1
-            toPointOffsetXSign = marginX + buttonRadius >= touchPointInset.left ? 1 : -1
+            fromPointOffsetYSign = marginY + buttonRadius >= touchPointInset.top ? -1 : 1
+            toPointOffsetXSign = 1
             toPointOffsetYSign = 1
             
         case .topRight:
-            fromPointOffsetXSign = touchPointInset.top >= arcRadius ? -1 : 1
-            fromPointOffsetYSign = marginY + buttonRadius >= touchPointInset.top  ? 1 : -1
-            toPointOffsetXSign = marginX + buttonRadius >= touchPointInset.right ? -1 : 1
+            fromPointOffsetXSign = touchPointInset.top >= arcRadius ? 1 : -1
+            fromPointOffsetYSign = marginY + buttonRadius >= touchPointInset.top  ? -1 : 1
+            toPointOffsetXSign = -1
             toPointOffsetYSign = 1
             
         case .bottomLeft:
             fromPointOffsetXSign = touchPointInset.bottom >= arcRadius ? -1 : 1
             fromPointOffsetYSign = marginY + buttonRadius >= touchPointInset.bottom ? -1 : 1
-            toPointOffsetXSign = marginX + buttonRadius >= touchPointInset.left ? 1 : -1
+            toPointOffsetXSign = 1
             toPointOffsetYSign = -1
             
         case .bottomRight:
-            fromPointOffsetXSign = touchPointInset.bottom >= arcRadius ? -1 : 1
+            fromPointOffsetXSign = touchPointInset.bottom >= arcRadius ? 1 : -1
             fromPointOffsetYSign = marginY + buttonRadius >= touchPointInset.bottom ? -1 : 1
-            toPointOffsetXSign = marginX + buttonRadius >= touchPointInset.right ? -1 : 1
+            toPointOffsetXSign = -1
             toPointOffsetYSign = -1
             
         default:
@@ -240,22 +231,23 @@ class ButtonPositioningDriver: NSObject {
         let offsetX: CGFloat = sqrt(pow(arcRadius, 2) - pow((closestHorizontalDistanceToEdge - (marginX + buttonRadius)), 2))
         let offsetY: CGFloat = sqrt(pow(arcRadius, 2) - pow((closestVerticalDistanceToEdge - (marginY + buttonRadius)), 2))
         
-        if (closestHorizontalDistanceToEdge == touchPointInset.left) {
-            
-        }
+        let baseFromPointX = point.x;
+        let baseFromPointY = touchPointPosition == .topLeft || touchPointPosition == .topRight ? 0.0 : size.height;
+        let baseToPointX = touchPointPosition == .topLeft || touchPointPosition == .bottomLeft ? 0.0 : size.width;
+        let baseToPointY = point.y;
         
-        var fromPoint: CGPoint = CGPoint(x: point.x + fromPointOffsetXSign * offsetX, y: fromPointOffsetYSign * (marginY + buttonRadius))
-        var toPoint: CGPoint = CGPoint(x:toPointOffsetXSign * (marginX + buttonRadius), y: point.y + toPointOffsetYSign * offsetY)
+        let fromPoint: CGPoint = CGPoint(x: baseFromPointX + fromPointOffsetXSign * offsetX, y: baseFromPointY + (marginY + buttonRadius) * fromPointOffsetYSign)
+        let toPoint: CGPoint = CGPoint(x:baseToPointX + (marginX + buttonRadius) * toPointOffsetXSign, y: baseToPointY + toPointOffsetYSign * offsetY)
         
         return [fromPoint, toPoint]
-        
     }
     
     private func distanceOfTouchPointToEdges(touchPoint point: CGPoint, inViewWithSize size: CGSize) -> UIEdgeInsets {
+        
         var edgeInsets : UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         
         edgeInsets.top = point.y
-        edgeInsets.bottom = size.height - 0
+        edgeInsets.bottom = size.height - edgeInsets.top
         edgeInsets.left = point.x
         edgeInsets.right = size.width - point.x
         
@@ -269,10 +261,9 @@ class ButtonPositioningDriver: NSObject {
         let verticalLength = fabs(centerPoint.y - anotherPoint.y)
         var angle = atan(verticalLength/horizontalLength)
         
-        if (isObstubeAngle) {
-            angle = ((CGFloat)(M_PI) - angle) * sign
-        }
-        else {
+        if isObstubeAngle {
+            angle = ((CGFloat)(Double.pi) - angle) * sign
+        } else {
             angle = angle * sign
         }
         
