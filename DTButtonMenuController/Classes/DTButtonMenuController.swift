@@ -130,7 +130,7 @@ open class DTButtonMenuController: UIViewController {
     /// Size is the current size of view controller's view.
     /// Calculation of positions should based on size, touchPoint and itemSize.
     func calculateItemPositions(with size: CGSize) {
-        let positioningProvider = ButtonPositioningDriver(numberOfButtons: items.count, buttonRadius: itemSize.width)
+        let positioningProvider = ButtonPositioningDriver(numberOfButtons: items.count, buttonRadius: itemSize.width/2)
         let positions = positioningProvider.positionsOfItemsInView(with: self.view.bounds.size, at: touchPoint)
         let count = positions.count
         for (index, position) in positions.enumerated() {
