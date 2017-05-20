@@ -107,13 +107,13 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gM6-JE-6O0">
-                                <rect key="frame" x="275" y="609" width="100" height="50"/>
+                                <rect key="frame" x="252" y="601" width="100" height="50"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="05h-I7-rn7"/>
-                                    <constraint firstAttribute="height" constant="50" id="oq7-Qh-icj"/>
+                                    <constraint firstAttribute="width" constant="100" id="qdU-NX-le3"/>
+                                    <constraint firstAttribute="height" constant="50" id="qlA-ld-VhZ"/>
                                 </constraints>
-                                <state key="normal" title="7">
+                                <state key="normal" title="Button">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
