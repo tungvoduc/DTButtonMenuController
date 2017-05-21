@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = 'DTButtonMenuController'
-  s.version          = '0.1.0'
-  s.summary          = 'A short description of DTButtonMenuController.'
+  s.version          = '1.0.0'
+  s.summary          = 'A customizable control that displays a collection of buttons for selection. This control is extremely easy to use and customize.'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -19,6 +19,7 @@ Pod::Spec.new do |s|
 
   s.description      = <<-DESC
 TODO: Add long description of the pod here.
+DTButtonMenuController is a control for displaying a selection of buttons. DTButtonMenuController is extremely easy to use and customize.
                        DESC
 
   s.homepage         = 'https://github.com/tungvoduc/DTButtonMenuController'

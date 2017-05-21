@@ -528,10 +528,7 @@
 			baseConfigurationReference = 11A55DC2A62FDDA499979E40 /* Pods-DTButtonMenuController_Tests.debug.xcconfig */;
 			buildSettings = {
 				DEVELOPMENT_TEAM = YEA93CRG3C;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -549,10 +546,7 @@
 			baseConfigurationReference = 5E8BF64C940887C1AF4824ED /* Pods-DTButtonMenuController_Tests.release.xcconfig */;
 			buildSettings = {
 				DEVELOPMENT_TEAM = YEA93CRG3C;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";

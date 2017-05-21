@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "8ED1945EE49826E623FA931B9E6AFC8EEF7317F2",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "8ED1945EE49826E623FA931B9E6AFC8EEF7317F2" : 9223372036854775807,
+    "D3181161A5A8BFC70ACAC5D5EC3411CB6772F592" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "79DAA8B0-ADB8-430E-BCDE-7BC60F87153B",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "8ED1945EE49826E623FA931B9E6AFC8EEF7317F2" : "DTButtonMenuController\/",
+    "D3181161A5A8BFC70ACAC5D5EC3411CB6772F592" : ""
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "DTButtonMenuController",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Example\/DTButtonMenuController.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/tungvoduc\/DTButtonMenuController.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "8ED1945EE49826E623FA931B9E6AFC8EEF7317F2"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/tungvoduc\/DTButtonMenuController.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "D3181161A5A8BFC70ACAC5D5EC3411CB6772F592"
+    }
+  ]
+}
