@@ -52,8 +52,12 @@ open class DTButtonMenuController: UIViewController {
     
     public init(highlightedView: UIView) {
         super.init(nibName: nil, bundle: nil)
-    
-        touchPoint = highlightedView.center
+        
+        guard let parentView = highlightedView.superview else {
+            fatalError("highlightedView should have superview")
+        }
+        
+        touchPoint = parentView.convert(highlightedView.center, to: nil) // Convert view's center to a correct point in view
         self.highlightedView = highlightedView
         commonInit()
     }
