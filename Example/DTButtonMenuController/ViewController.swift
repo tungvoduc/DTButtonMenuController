@@ -34,6 +34,8 @@ class ViewController: UIViewController {
 
     @IBAction func buttonTapped(_ button: UIButton) {
         let viewController = DTButtonMenuController(highlightedView: button)
+        viewController.itemSize = CGSize(width: 50, height: 50)
+        viewController.itemsDistanceToTouchPoint = 100
         viewController.addItem(DTMenuButton(view: CustomItemView(type: UIButtonType.system), completionHandlerBlock: {(item: DTMenuButton) in
             print("Button 1")
         }))

@@ -62,14 +62,14 @@ extension TransitionController: UIViewControllerAnimatedTransitioning {
         
         // Calculate each item's position before animation
         if isPrensting {
-            menuController.calculateItemPositions(with: toViewController.view.bounds.size)
+            calculateItemPositions(with: toViewController.view.bounds.size)
             
             // Add view when presenting
             toViewController.view.frame = transitionContext.finalFrame(for: toViewController)
             container.addSubview(toViewController.view)
         }
         else {
-            menuController.calculateItemPositions(with: fromViewController.view.bounds.size)
+            calculateItemPositions(with: fromViewController.view.bounds.size)
         }
         
         if #available(iOS 10.0, *) {
@@ -123,5 +123,19 @@ extension TransitionController: UIViewControllerAnimatedTransitioning {
     
     func animationEnded(_ transitionCompleted: Bool) {
         
+    }
+    
+    /// Calculate position of each items with this method.
+    /// Size is the current size of view controller's view.
+    /// Calculation of positions should based on size, touchPoint and itemSize.
+    func calculateItemPositions(with size: CGSize) {
+        let positioningProvider = ButtonPositioningDriver(numberOfButtons: menuController.items.count, buttonRadius: menuController.itemSize.width/2)
+        positioningProvider.distance = menuController.itemsDistanceToTouchPoint
+        
+        let positions = positioningProvider.positionsOfItemsInView(with: menuController.view.bounds.size, at: menuController.touchPoint)
+        
+        for (index, position) in positions.enumerated() {
+            menuController.items[index].position = position
+        }
     }
 }

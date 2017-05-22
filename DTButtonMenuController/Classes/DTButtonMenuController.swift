@@ -27,6 +27,10 @@ open class DTButtonMenuController: UIViewController {
         }
     }
     
+    /// Distance between original touchPoint to each item in controller when displaying.
+    /// Default value is 80.
+    public var itemsDistanceToTouchPoint: CGFloat = 80
+    
     /// shouldHighlightView indicates whether or not highlightedView should be highlighted when menu is displayed. 
     /// Default value if true.
     public var shouldHighlightView = true
@@ -127,17 +131,6 @@ open class DTButtonMenuController: UIViewController {
             if strongSelf.shouldDismissOnAction {
                 strongSelf.dismiss(animated: true, completion: nil)
             }
-        }
-    }
-    
-    /// Calculate position of each items with this method.
-    /// Size is the current size of view controller's view.
-    /// Calculation of positions should based on size, touchPoint and itemSize.
-    func calculateItemPositions(with size: CGSize) {
-        let positioningProvider = ButtonPositioningDriver(numberOfButtons: items.count, buttonRadius: itemSize.width/2)
-        let positions = positioningProvider.positionsOfItemsInView(with: self.view.bounds.size, at: touchPoint)
-        for (index, position) in positions.enumerated() {
-            items[index].position = position
         }
     }
     

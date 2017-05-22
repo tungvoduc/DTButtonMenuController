@@ -44,7 +44,7 @@ class ButtonPositioningDriver: NSObject {
     var buttonsArc: Double = Double.pi / 2 + Double.pi / 6
     
     /// Distance from touchPoint to a button
-    var distance: CGFloat = 100.0
+    var distance: CGFloat = 80.0
     
     /// Allow the buttons and the distance from touchPoint to the button center to be scaled
     var scaleable: Bool = false
@@ -53,7 +53,7 @@ class ButtonPositioningDriver: NSObject {
     var margin: CGFloat = 8.0
     
     /// If not provide maxButtonsAngle, maxButtonsAngle will be automatically calculated by numberOfButtons, maxButtonsAngle = Pi/(numberOfButtons * 2)
-    init(numberOfButtons: Int, buttonRadius radius: CGFloat, buttonsAngle angle: Double = Double.pi/6, positioningType type: ButtonPositionDriverType = .Arc) {
+    init(numberOfButtons: Int = 1, buttonRadius radius: CGFloat, buttonsAngle angle: Double = Double.pi/6, positioningType type: ButtonPositionDriverType = .Arc) {
         numberOfItems = numberOfButtons
         buttonRadius = radius
         
