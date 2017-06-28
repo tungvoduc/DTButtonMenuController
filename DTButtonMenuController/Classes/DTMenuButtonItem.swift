@@ -30,17 +30,8 @@ public final class DTMenuButton: NSObject {
     }
 }
 
-/// Class DTMenuButtonView.
-/// Default view class for view in DTMenuButton.
-open class DTMenuItemView: UIButton {
-    open override func layoutSubviews() {
-        super.layoutSubviews()
-        layer.cornerRadius = self.frame.size.width/2
-        layer.masksToBounds = true
-        layer.borderColor = UIColor.black.cgColor
-        layer.borderWidth = 1
-    }
-}
+/// DTMenuButtonView.
+public typealias DTMenuItemView = UIButton
 
 
 
