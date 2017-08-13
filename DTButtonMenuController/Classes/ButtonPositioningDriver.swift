@@ -29,6 +29,10 @@ enum TouchPointPosition {
 }
 
 class ButtonPositioningDriver: NSObject {
+    
+    /// Automatically shrink the arc of buttons
+    var shouldShrinkArc = true
+    
     /// Number of buttons that will be displayed.
     var numberOfItems: Int
     
@@ -75,13 +79,18 @@ class ButtonPositioningDriver: NSObject {
         
         let difference = toAngle - fromAngle
         
+        let sign = toAngle - fromAngle > 0 ? 1.0 : -1.0
+        var step = (buttonsArc * sign) / Double(numberOfItems - 1)
+        
         if fabs(difference) > buttonsArc {
-            
             startingAngle = difference > 0 ? (difference - buttonsArc) / 2 : (difference +  buttonsArc) / 2
         }
         
-        let step = (toAngle - fromAngle > 0 ? buttonsArc : -buttonsArc ) / Double(numberOfItems - 1)
-        
+        if fabs(difference) < buttonsArc {
+            if (shouldShrinkArc) {
+                step = fabs(difference) * sign / Double(numberOfItems - 1)
+            }
+        }
         
         for i in 0 ..< numberOfItems {
             let angle = step * Double(i) + fromAngle + startingAngle;
@@ -150,7 +159,6 @@ class ButtonPositioningDriver: NSObject {
         } else if touchPointPosition == .topRight || touchPointPosition == .bottomRight {
             secondAngle = secondAngle > 0 ? -(Double.pi * 2 - secondAngle) : secondAngle;
         }
-        
         return [firstAngle, secondAngle];
     }
     
@@ -178,7 +186,7 @@ class ButtonPositioningDriver: NSObject {
         
         return touchPosition
     }
-
+    
     private func thresholdPointsOfButtonsArcInView(withSize size: CGSize, atTouchPoint point: CGPoint) -> [CGPoint]  {
         
         let marginX: CGFloat = margin;
@@ -208,13 +216,13 @@ class ButtonPositioningDriver: NSObject {
             
         case .bottomLeft:
             fromPointOffsetXSign = touchPointInset.bottom >= arcRadius ? -1 : 1
-            fromPointOffsetYSign = marginY + buttonRadius >= touchPointInset.bottom ? -1 : 1
+            fromPointOffsetYSign = marginY + buttonRadius >= touchPointInset.bottom ? 1 : -1
             toPointOffsetXSign = 1
             toPointOffsetYSign = -1
             
         case .bottomRight:
             fromPointOffsetXSign = touchPointInset.bottom >= arcRadius ? 1 : -1
-            fromPointOffsetYSign = marginY + buttonRadius >= touchPointInset.bottom ? -1 : 1
+            fromPointOffsetYSign = marginY + buttonRadius >= touchPointInset.bottom ? 1 : -1
             toPointOffsetXSign = -1
             toPointOffsetYSign = -1
             
@@ -228,8 +236,8 @@ class ButtonPositioningDriver: NSObject {
         let closestHorizontalDistanceToEdge = touchPointInset.left > touchPointInset.right ? touchPointInset.right : touchPointInset.left
         let closestVerticalDistanceToEdge = touchPointInset.top > touchPointInset.bottom ? touchPointInset.bottom : touchPointInset.top
         
-        let offsetX: CGFloat = sqrt(pow(arcRadius, 2) - pow((closestHorizontalDistanceToEdge - (marginX + buttonRadius)), 2))
-        let offsetY: CGFloat = sqrt(pow(arcRadius, 2) - pow((closestVerticalDistanceToEdge - (marginY + buttonRadius)), 2))
+        let offsetX: CGFloat = sqrt(pow(arcRadius, 2) - pow(max(abs((closestHorizontalDistanceToEdge - (marginX + buttonRadius))), (marginX + buttonRadius)), 2))
+        let offsetY: CGFloat = sqrt(pow(arcRadius, 2) - pow(max(abs((closestVerticalDistanceToEdge - (marginY + buttonRadius))), (marginY + buttonRadius)), 2))
         
         let baseFromPointX = point.x;
         let baseFromPointY = touchPointPosition == .topLeft || touchPointPosition == .topRight ? 0.0 : size.height;
