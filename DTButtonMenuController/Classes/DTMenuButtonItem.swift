@@ -30,8 +30,11 @@ public final class DTMenuButton: NSObject {
     }
 }
 
-/// DTMenuButtonView.
-public typealias DTMenuItemView = UIButton
+/// Class DTMenuButtonView.
+/// Default view class for view in DTMenuButton.
+open class DTMenuItemView: UIButton {
+    
+}
 
 
 
