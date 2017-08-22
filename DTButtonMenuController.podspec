@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'DTButtonMenuController'
-  s.version          = '1.0.2'
+  s.version          = '1.0.5'
   s.summary          = 'A customizable control that displays a collection of buttons for selection. This control is extremely easy to use and customize.'
 
 # This description is used to generate tags and improve search results.
