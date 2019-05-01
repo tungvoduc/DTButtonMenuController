@@ -2,7 +2,7 @@
 //  TransitionController.swift
 //  Pods
 //
-//  Created by Admin on 17/03/2017.
+//  Created by tungvoduc on 17/03/2017.
 //
 //
 
@@ -116,10 +116,6 @@ extension TransitionController: UIViewControllerAnimatedTransitioning {
             })
         }
     }
-    
-    //    func interruptibleAnimator(using transitionContext: UIViewControllerContextTransitioning) -> UIViewImplicitlyAnimating {
-    //
-    //    }
     
     func animationEnded(_ transitionCompleted: Bool) {
         

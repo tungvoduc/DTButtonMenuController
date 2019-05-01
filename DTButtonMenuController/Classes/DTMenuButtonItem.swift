@@ -2,18 +2,18 @@
 //  DTMenuButtonItem.swift
 //  Pods
 //
-//  Created by Admin on 13/03/2017.
+//  Created by tungvoduc on 13/03/2017.
 //
 //
 
 import Foundation
 
 public final class DTMenuButton: NSObject {
-    public init(view: DTMenuItemView = DTMenuItemView(type: UIButtonType.custom), completionHandlerBlock: DTButtonItemHandlerBlock?) {
+    public init(view: DTMenuItemView = DTMenuItemView(type: .custom), completionHandlerBlock: DTButtonItemHandlerBlock?) {
         super.init()
         self.view = view
         self.completionHandlerBlock = completionHandlerBlock
-        view.addTarget(self, action: #selector(buttonTapped(_:)), for: UIControlEvents.touchUpInside)
+        view.addTarget(self, action: #selector(buttonTapped(_:)), for: UIControl.Event.touchUpInside)
     }
     
     /// Handler for item
@@ -25,7 +25,7 @@ public final class DTMenuButton: NSObject {
     /// Final position of item when displaying on menu controller. Public get only.
     var position: CGPoint = CGPoint.zero
     
-    func buttonTapped(_ button: UIButton) {
+    @objc func buttonTapped(_ button: UIButton) {
         completionHandlerBlock?(self)
     }
 }

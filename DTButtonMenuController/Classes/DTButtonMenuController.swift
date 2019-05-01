@@ -2,7 +2,7 @@
 //  DTButtonMenuController.swift
 //  Pods
 //
-//  Created by Admin on 13/03/2017.
+//  Created by tungvoduc on 13/03/2017.
 //
 //
 
@@ -134,7 +134,7 @@ open class DTButtonMenuController: UIViewController {
         }
     }
     
-    func viewTapped(_ gestureRecognizer: UIGestureRecognizer) {
+    @objc func viewTapped(_ gestureRecognizer: UIGestureRecognizer) {
         if shouldDismissOnAction {
             dismiss(animated: true, completion: nil)
         }

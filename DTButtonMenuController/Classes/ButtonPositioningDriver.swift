@@ -2,15 +2,15 @@
 //  ButtonPositioningDriver.swift
 //  Pods
 //
-//  Created by Admin on 17/03/2017.
+//  Created by tungvoduc on 17/03/2017.
 //
 //
 
 import UIKit
 
 enum ButtonPositionDriverType {
-    case Satellite
-    case Arc
+    case satellite
+    case arc
 }
 
 enum Position {
@@ -57,7 +57,7 @@ class ButtonPositioningDriver: NSObject {
     var margin: CGFloat = 8.0
     
     /// If not provide maxButtonsAngle, maxButtonsAngle will be automatically calculated by numberOfButtons, maxButtonsAngle = Pi/(numberOfButtons * 2)
-    init(numberOfButtons: Int = 1, buttonRadius radius: CGFloat, buttonsAngle angle: Double = Double.pi/6, positioningType type: ButtonPositionDriverType = .Arc) {
+    init(numberOfButtons: Int = 1, buttonRadius radius: CGFloat, buttonsAngle angle: Double = Double.pi/6, positioningType type: ButtonPositionDriverType = .arc) {
         numberOfItems = numberOfButtons
         buttonRadius = radius
         
@@ -107,7 +107,7 @@ class ButtonPositioningDriver: NSObject {
         var fromAngle = 0.0;
         var toAngle = 0.0;
         
-        if (positioningType == .Satellite) {
+        if (positioningType == .satellite) {
             fromAngle = 0.0;
             toAngle = Double.pi * 2;
         } else {
@@ -265,8 +265,8 @@ class ButtonPositioningDriver: NSObject {
     private func angleBetweenHorizontalLineAndLineHasCenterPointAndAnotherPoint(centerPoint: CGPoint, anotherPoint: CGPoint) -> CGFloat {
         let sign: CGFloat = anotherPoint.y < centerPoint.y ? -1 : 1
         let isObstubeAngle: Bool = anotherPoint.x < centerPoint.x ? true : false
-        let horizontalLength = fabs(centerPoint.x - anotherPoint.x)
-        let verticalLength = fabs(centerPoint.y - anotherPoint.y)
+        let horizontalLength = abs(centerPoint.x - anotherPoint.x)
+        let verticalLength = abs(centerPoint.y - anotherPoint.y)
         var angle = atan(verticalLength/horizontalLength)
         
         if isObstubeAngle {

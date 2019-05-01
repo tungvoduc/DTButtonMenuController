@@ -12,7 +12,6 @@
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
-		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
 		9FF98F55CA4F86E9DB6B192C /* Pods_DTButtonMenuController_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E71FF71AE5A10AF62597A7E3 /* Pods_DTButtonMenuController_Example.framework */; };
 		DFFD7327BC2E4B0C1CF36DAF /* Pods_DTButtonMenuController_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93FE33468A8BA835ADE49BE2 /* Pods_DTButtonMenuController_Tests.framework */; };
 /* End PBXBuildFile section */
@@ -41,7 +40,6 @@
 		607FACDF1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		607FACE51AFB9204008FA782 /* DTButtonMenuController_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DTButtonMenuController_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		628CE20FBF5F0671A0253F59 /* DTButtonMenuController.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = DTButtonMenuController.podspec; path = ../DTButtonMenuController.podspec; sourceTree = "<group>"; };
 		8B701B75940840DC46EA816B /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		93FE33468A8BA835ADE49BE2 /* Pods_DTButtonMenuController_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DTButtonMenuController_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -124,7 +122,6 @@
 		607FACE81AFB9204008FA782 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				607FACEB1AFB9204008FA782 /* Tests.swift */,
 				607FACE91AFB9204008FA782 /* Supporting Files */,
 			);
 			path = Tests;
@@ -334,7 +331,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				607FACEC1AFB9204008FA782 /* Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
