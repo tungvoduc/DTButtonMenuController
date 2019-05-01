@@ -8,8 +8,9 @@
 
 Pod::Spec.new do |s|
   s.name             = 'DTButtonMenuController'
-  s.version          = '1.0.5'
+  s.version          = '1.0.6'
   s.summary          = 'A customizable control that displays a collection of buttons for selection. This control is extremely easy to use and customize.'
+  s.swift_version    = '5.0'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -23,21 +24,10 @@ DTButtonMenuController is a control for displaying a selection of buttons. DTBut
                        DESC
 
   s.homepage         = 'https://github.com/tungvoduc/DTButtonMenuController'
-  # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'tungvoduc' => 'tung98.dn@gmail.com' }
   s.source           = { :git => 'https://github.com/tungvoduc/DTButtonMenuController.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
-
   s.ios.deployment_target = '8.0'
-
   s.source_files = 'DTButtonMenuController/Classes/**/*'
   
-  # s.resource_bundles = {
-  #   'DTButtonMenuController' => ['DTButtonMenuController/Assets/*.png']
-  # }
-
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
 end
